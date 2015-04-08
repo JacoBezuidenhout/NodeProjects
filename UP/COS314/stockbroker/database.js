@@ -109,9 +109,9 @@ DB.prototype.addDat = function (dat)
 DB.prototype.getTraderDats = function (trader)
 {
   dats.forEach(function(dat){
+    var item = JSON.parse(dat.dat);
     for (i = 0; i < dat.dat.length; i++)
     {
-      var item = JSON.parse(dat.dat);
       console.log(item);
       dat.dat[i].action = trader.trader[parseInt(dat.dat[i].chromo,2)];
     }
