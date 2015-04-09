@@ -57,9 +57,71 @@ function DatToRenko(entry)
         last = data[i][1];
       }
     }
-  //  console.log(renko);
-   entry.dat = JSON.stringify(renko);
 
+   entry.dat = renko;
+}
+
+function mutual_cost(trade_amount)
+{
+  var fees = 0;
+  //Brokerage fee
+  fees += Math.max(Math.round(0.5/100*trade_amount),7000);
+  //Strate Tax
+  fees += (1158);
+  //IPL
+  fees += Math.round(0.0002/100*trade_amount);
+
+  return fees;
+}
+
+function buy(line)
+{
+  if (line.shares > 0)
+  {
+    var trade_amount = (line.shares*line.avg);
+    var fees = 0;
+    //STT
+    fees += Math.round(0.25/100*trade_amount);
+    //mutual
+    fees += mutual_cost(trade_amount);
+    //vat
+    fees *= 1.14;
+
+    var total = Math.round(trade_amount+fees);
+
+    if (total < line.balance)
+      {
+        line.balance -= total;
+        return line;
+      }
+    else
+    {
+      line.shares -= 1;
+      line = buy(line);
+        return line;
+    }
+  } else
+        return line;
+
+}
+
+function sell(line)
+{
+  if (line.shares > 0)
+  {
+    var trade_amount = (line.shares*line.avg);
+    var fees = 0;
+    //STT
+    fees += Math.round(0.25/100*trade_amount);
+    //mutual
+    fees += mutual_cost(trade_amount);
+    //vat
+    fees *= 1.14;
+
+    var total = Math.round(trade_amount-fees);
+    line.balance += total;
+  }
+  return line;
 }
 
 ////////////////////////////////////////////////////Database functions
@@ -71,9 +133,8 @@ var DB = function (defaults)
 
   dats = defaults.dats;
   dats.forEach(DatToRenko);
-
-
-  this.getTraderDats(traders[0]);
+  console.log(dats[0].dat[0]);
+  // this.getSummary(traders[0]);
 };
 
 ////////////////////////////////////////////////////Trader functions
@@ -108,19 +169,56 @@ DB.prototype.addDat = function (dat)
 
 DB.prototype.getTraderDats = function (trader)
 {
+
   dats.forEach(function(dat){
-    var item = JSON.parse(dat.dat);
     for (i = 0; i < dat.dat.length; i++)
     {
-      console.log(item);
       dat.dat[i].action = trader.trader[parseInt(dat.dat[i].chromo,2)];
     }
-
   });
 
   return dats;
 
 };
 
+DB.prototype.getSummary = function (trader)
+{
+  var data = this.getTraderDats(trader);
+  var last = 0;
+  trader.summary = [];
+
+  data.forEach(function(dat){
+    var balance = trader.balance;
+    var shares = 0;
+
+    dat.dat.forEach(function(line){
+      var avg = Math.round((parseInt(line.data[2])+parseInt(line.data[3]))/2);
+      //console.log(avg);
+      if (line.action == 'B')
+      {
+
+          var res = buy({"shares":Math.floor(balance/avg),"avg": avg, "balance":balance});
+          balance = res.balance;
+          shares += res.shares;
+      }
+
+      if (line.action == 'S')
+      {
+
+          var res = sell({"shares":shares,"avg": avg, "balance":balance});
+          balance = res.balance;
+          shares -= res.shares;
+      }
+
+          line.shares = shares;
+          line.balance = balance;
+          last = line;
+    });
+          var fitness = balance+shares*parseInt(last.data[1]);
+          trader.summary.push({"share":dat.name,"shares":shares,"balance":balance,"fitness": fitness, "ROI": (fitness-trader.balance)});
+  });
+
+  return {"trader": trader, "data": data};
+}
 
 module.exports = DB;

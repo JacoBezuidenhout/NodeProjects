@@ -1,20 +1,19 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-<h3>Hello {{world}}</h3>
-
 {{#if data}}
 
   {{#each data}}
 
-    <h3>Trader: {{this.trader.trader}}</h3>
+    <h3>Share: {{this.name}}</h3>
     <table class="table">
-      <tr><td>Share Name</td><td>#Shares</td><td>Balance</td><td>Fitness</td><td>Profit</td></tr>
-      {{#each this.trader.summary}}
+      <tr><td>Data</td><td>UP / DOWN</td><td>Chromosome</td><td>Valid</td><td>Renko</td></tr>
+      {{#each this.dat}}
         <tr>
             {{#each this}}
               <td>{{this}}</td>
             {{/each}}
+            <td><canvas id="canvas_{{{renko this.chromo}}}"></canvas></td>
         </tr>
       {{/each}}
     </table>

@@ -1,13 +1,13 @@
 {"traders":
   [
-    {"trader": "BBBSHHSHSBBSSHBHHHSSSBHHSSHBSHHS"},
-    {"trader": "BBBBBBBBHHHHHHSSSSSSHSHHHHSSSSSS"}
+    {"trader": "BBBSHHSHSBBSSHBHHHSSSBHHSSHBSHHS", "balance":10000000},
+    {"trader": "BBBBBBBBHHHHHHSSSSSSHSHHHHSSSSSS", "balance":10000000}
   ],
 
   "dats":
   [
-    {"dat": "agl"},
-    {"dat": "bil"},
-    {"dat": "gfi"}
+    {"name": "AGL", "dat": "agl"},
+    {"name": "BIL", "dat": "bil"},
+    {"name": "GFI", "dat": "gfi"}
   ]
 }
