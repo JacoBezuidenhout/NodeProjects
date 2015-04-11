@@ -12,6 +12,7 @@ var db =  monk('localhost:27017/PaperLessForms');
 var routes = require('./routes/index');
 var form = require('./routes/form');
 var admin = require('./routes/admin');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/forms', form);
+app.use('/api', api);
 app.use('/admin', admin);
 
 // catch 404 and forward to error handler
