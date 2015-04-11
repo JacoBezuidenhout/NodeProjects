@@ -1,1 +1,20 @@
 <h1>{{project_name}}</h1>
+
+<h2>API Docs</h2>
+<ul>
+  <li>
+    <h3>/api/getForms</h3>
+    <p>[</p>
+    <p>{"title":"Form Title","desc":"Form Description","fields":["Name","Surname","ID","Age","Tel"],"_id":"5528d99a6eeb6d21385f42b3"},</p>
+    <p>{"title":"Form Title 2","desc":"Form Description 2","fields":["Name","Surname","ID","Age","Tel"],"_id":"5528d99a6eeb6d21385f42b6"}</p>
+    <p>]</p>
+  </li>
+  <li>
+    <h3>/api/submitForm</h3>
+    <h4>Input</h4>
+    <p>{</br>"title":"Form Title",</br>"desc":"Form Description",</br>"fields":</br>{</br>"Name":"John",</br>"Surname":"Peters",</br>"ID":"8605135118083",</br>"Age":"29",</br>"Tel":"+27126587855"</br>},</br>"_id":"5528d99a6eeb6d21385f42b3"</br>}</p>
+    <h4>Output</h4>
+    <p>{"success":(true||false), "err":(error string)}</p>
+  </li>
+
+</ul>
