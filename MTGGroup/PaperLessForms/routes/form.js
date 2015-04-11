@@ -31,6 +31,7 @@ router.post('/addForm', function(req, res, next) {
     body.fields = body.fields.split(",")
 
   var db = req.db;
+  
     var collection = db.get('forms');
     collection.insert(body,function(e,form){
         res.location("/forms");
