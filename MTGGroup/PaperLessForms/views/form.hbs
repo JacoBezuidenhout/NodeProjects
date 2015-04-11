@@ -1,0 +1,22 @@
+<h1>Forms</h1>
+<ul>
+
+  {{#each data}}
+    <li>
+      <a href="/forms/:{{this._id}}">{{this.title}}: {{this.desc}}</a>
+      <ul>
+        {{#each this.fields}}
+          <li>{{this}}</li>
+        {{/each }}
+      </ul>
+    </li>
+  {{/each }}
+</ul>
+
+<h3>Add Form</h3>
+<form method="post" action="/forms/addForm">
+  <input name="title" type="text" placeholder="Form Title"/>
+  <input name="desc" type="text" placeholder="Description"/>
+  <input name="fields" type="text" placeholder="field1,field2,field3" />
+  <input type="submit" />
+</form>

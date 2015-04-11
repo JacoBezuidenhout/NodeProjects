@@ -12,15 +12,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET form page. */
-router.get('/:', function(req, res, next) {
+router.get('/:*', function(req, res, next) {
   var db = req.db;
   var collection = db.get('forms');
-
-  console.log("find by: "+ id);
-  get_collection(function(collection) {
-    collection.findOne({"_id": new ObjectId(id)}, function(err, forms) {
-      res.render('forms', { title: 'Welcome | Home', project_name: "Paperless Forms", data: forms });
-    });
+  var id = req.path.split(":")[1];
+  collection.findOne({"_id": new ObjectId(id)}, function(err, forms) {
+    res.render('form', { title: 'Welcome | Home', project_name: "Paperless Forms", data: forms });
   });
 });
 
@@ -31,7 +28,7 @@ router.post('/addForm', function(req, res, next) {
     body.fields = body.fields.split(",")
 
   var db = req.db;
-  
+
     var collection = db.get('forms');
     collection.insert(body,function(e,form){
         res.location("/forms");
