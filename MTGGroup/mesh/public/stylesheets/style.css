@@ -1,0 +1,25 @@
+body
+{
+  padding:30px;
+  margin:0;
+  background:#000;
+  color:grey;
+}
+
+#gauge
+{
+  position: fixed;
+  top: 0px; right: 0px;
+  width: 400px;
+  height: 400px;
+}
+
+#map
+{
+  background:#fff;
+  position: absolute;
+  top: 0px; right: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
