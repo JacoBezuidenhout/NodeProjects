@@ -1,0 +1,48 @@
+{
+  "app":      {"name":"IOTGroup"},
+  "server":   {"domain":"iotgroup.info", "port":"8080"},
+  "database": {"server":"localhost", "name":"iot", "port":"27017"},
+  "api":
+    {
+      "gateways":
+        [
+          {"type":"EDISO001", "name":"Intel Edison Gateway V1.0"  },
+          {"type":"GALIL001", "name":"Intel Galileo Gateway V1.0" },
+          {"type":"ARDUI001", "name":"Arduino Gateway V1.0"       },
+          {"type":"RASPI001", "name":"Raspberry PI Gateway V1.0"  }
+        ],
+      "nodes":
+        [
+          {"type":"QUAD001","name": "Quad V1.0"},
+          {"type":"HEXA001","name": "HEXA V1.0"}
+        ],
+      "modules":
+        [
+          {"type":"TMP001", "name":"Temperature", "min":0,"max":100,"safe_zone":{"low":40,"mid": 50,"high":60},   "unit":"*C" },
+          {"type":"HUM001", "name":"Humidity",    "min":0,"max":100,"safe_zone":{"low":40,"mid": 50,"high":60},   "unit":"%"  },
+          {"type":"LEV001", "name":"Level",       "min":0,"max":100,"safe_zone":{"low":40,"mid": 70,"high":100},  "unit":"%"  },
+          {"type":"LIG001", "name":"Light",       "min":0,"max":100,"safe_zone":{"low":40,"mid": 50,"high":60},   "unit":"%"  },
+          {"type":"BAT001", "name":"Battery",     "min":0,"max":100,"safe_zone":{"low":40,"mid": 70,"high":100},  "unit":"%"  }
+        ]
+    },
+  "menu":
+  {
+    "index": {"title":"Dashboard","url":"/"},
+
+    "gateways": {"title":"Gateways","url":"/gateways",
+      "submenu":
+      [
+        {"title":"Status","url":"/gateways/status"},
+        {"title":"Add New","url":"/gateways/add"}
+      ]
+    },
+    "api": {"title":"API","url":"/api",
+      "submenu":
+      [
+        {"title":"Summary","url":"/api"},
+        {"title":"Publish","url":"/api/publish"},
+        {"title":"Get","url":"/api/get"}
+      ]
+    }
+  }
+}
