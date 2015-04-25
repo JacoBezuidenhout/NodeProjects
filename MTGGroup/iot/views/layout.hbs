@@ -20,14 +20,14 @@
     <!-- Custom styles for this template -->
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/style-responsive.css" rel="stylesheet">
-
     <script src="/assets/js/chart-master/Chart.js"></script>
 
   </head>
 
   <body>
-
   <section id="container" >
+
+{{#if login}}
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
@@ -114,7 +114,9 @@
                                   </a>
                               </li>
                             {{else}}
-                              <li>No new updates</li>
+                            <li>
+                                <p>No Updates</p>
+                            </li>
                             {{/each}}
                             <li>
                                 <a href="/updates/">See All Updates</a>
@@ -245,8 +247,10 @@
           </div>
       </footer>
       <!--footer end-->
+  {{else}}
+  {{{body}}}
+{{/if}}
   </section>
-
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/assets/js/jquery.js"></script>
     <script src="/assets/js/jquery-1.8.3.min.js"></script>

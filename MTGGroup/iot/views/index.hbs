@@ -1,2 +1,104 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="row mtbox">
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<span class="li_heart"></span>
+					  			<h3>{{gateways.length}}</h3>
+                  			</div>
+					  			<p>You currently own {{gateways.length}} gateway(s). Whoohoo!</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_cloud"></span>
+					  			<h3>{{nodes.length}}</h3>
+                  			</div>
+					  			<p>You currently own {{nodes.length}} nodes actively sending data.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_stack"></span>
+					  			<h3>{{modules.length}}</h3>
+                  			</div>
+					  			<p>You have {{modules.length}} modules in the field.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_news"></span>
+					  			<h3>+{{stats.api.total}}</h3>
+                  			</div>
+					  			<p>You have made {{stats.api.total}} API calls this year.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_data"></span>
+					  			<h3>{{status.value}}</h3>
+                  			</div>
+					  			<p>{{status.message}}</p>
+                  		</div>
+
+                  	</div><!-- /row mt -->
+
+					<div class="row mt">
+                      <!--CUSTOM CHART START -->
+                      <div class="border-head">
+                          <h3>API usage</h3>
+                      </div>
+                      <div class="custom-bar-chart">
+                          <ul class="y-axis">
+                              <li><span>10</span></li>
+                              <li><span>8</span></li>
+                              <li><span>6</span></li>
+                              <li><span>4</span></li>
+                              <li><span>2</span></li>
+                              <li><span>0</span></li>
+                          </ul>
+                          <div class="bar">
+                              <div class="title">JAN</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.jan.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jan.percent}}%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">FEB</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.feb.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.feb.percent}}%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">MAR</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.mar.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.mar.percent}}%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">APR</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.apr.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.apr.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">MAY</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.may.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.may.percent}}%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">JUN</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.jun.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jun.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">JUL</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.jul.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jul.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">AUG</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.aug.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.aug.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">SEP</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.sep.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.sep.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">OCT</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.oct.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.oct.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">NOV</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.nov.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.nov.percent}}%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">DEC</div>
+                              <div class="value tooltips" data-original-title="{{stats.api.dec.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.dec.percent}}%</div>
+                          </div>
+                      </div>
+                      <!--custom chart end-->
+					</div><!-- /row -->

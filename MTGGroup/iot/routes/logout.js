@@ -3,8 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  req.output.title = "Welcome | IOTGroup";
-  res.render('index', req.output);
+  req.output.login = 0;
+  req.session.destroy(function(err) {
+  // cannot access session here
+  });
+  res.redirect("/");
 });
 
 module.exports = router;

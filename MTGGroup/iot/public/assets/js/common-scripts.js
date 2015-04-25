@@ -111,7 +111,7 @@ var Script = function () {
             $(this).find(".value").html("");
             $(this).find(".value").animate({
                 height: i
-            }, 2000)
+            }, 1000)
         })
     }
 

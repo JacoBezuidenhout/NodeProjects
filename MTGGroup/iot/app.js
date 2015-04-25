@@ -9,12 +9,19 @@ var settings = require('./settings.json');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(settings.database.server + ":" + settings.database.port + "/" + settings.database.name);
+var CONTROLLER = require('./controller');
+var controller = new CONTROLLER(db);
 
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
+
+var options = { dir:'./sessions' };
 
 var app = express();
 global.settings = settings;
@@ -29,17 +36,35 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    store: new FileStore(options),
+    secret: 'qwertyuiop',
+    cookie: { maxAge: 20000000000 }
+}));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
   req.db = db;
-  console.log(req.method);
-  next();
+  req.output = settings;
+  req.output.user = req.session.user || {};
+  if (typeof req.session.user === "undefined" && req.path != "/login")
+  {
+    req.output.login = 0;
+    res.redirect("/login");
+    return;
+  }
+  else
+  {
+    var tmp = controller.get(req.session);
+    for (var key in tmp) { req.output[key] = tmp[key]; }
+    next();
+  }
 });
 
 app.use('/', routes);
 app.use('/api', api);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
