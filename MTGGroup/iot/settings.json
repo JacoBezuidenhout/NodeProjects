@@ -32,8 +32,8 @@
     "gateways": {"title":"Gateways","url":"/gateways",
       "submenu":
       [
-        {"title":"Status","url":"/gateways/status"},
-        {"title":"Add New","url":"/gateways/add"}
+        {"title":"Status","url":"/gateways"},
+        {"title":"Add New","url":"#addGateway", "extra":"data-toggle=modal" }
       ]
     },
     "api": {"title":"API","url":"/api",

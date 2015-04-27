@@ -8,30 +8,24 @@ router.get('/', function(req, res, next) {
 
 router.post('/',function(req, res, next) {
   var users = req.db.get("users");
-  var log = req.db.get("log");
-  var user = {};
-  user.id = 0;
-  user.name = "Jaco";
-  user.surname = "Bezuidenhout";
-  user.email = "jaco@peoplesoft.co.za";
-  user.photo = "/assets/img/me.jpg";
-  req.session.user = user;
-  req.output.login = 1;
-  req.output.user = user;
-
-  res.redirect("/");
-  // users.findOne({username: req.body.username}, function(err,data)
-  // {
-  //   if (err || !data)
-  //     res.render('login', { title: 'Login', message: "Invalid Username/Password"});
-  //   else
-  //   {
-  //     if (data.password == req.body.password)
-  //       res.render('index', { title: 'Login', message: "Success" });
-  //     else
-  //       res.render('login', { title: 'Login', message: "Invalid Username/Password"});
-  //   }
-  // });
+  req.session.user = {};
+  users.findOne({email: req.body.username}, function(err,data)
+  {
+    if (err || !data)
+      res.render('login', { title: 'Login', message: "Invalid Username/Password"});
+    else
+    {
+      if (data.password == req.body.password)
+      {
+        req.session.user = data;
+        req.output.login = 1;
+        req.output.user = data;
+        res.redirect("/");
+      }
+      else
+        res.render('login', { title: 'Login', message: "Invalid Username/Password"});
+    }
+  });
 });
 
 module.exports = router;

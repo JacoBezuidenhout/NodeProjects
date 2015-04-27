@@ -20,11 +20,30 @@ var users = require('./routes/users');
 var api = require('./routes/api');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
+var gateways = require('./routes/gateways');
 
 var options = { dir:'./sessions' };
-
+var debug = require('debug')('iot:server');
+var http = require('http');
 var app = express();
-global.settings = settings;
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(settings.server.port || '3000');
+app.set('port', port);
+
+var server = http.createServer(app);
+var io = require('socket.io')(server);
+
+  io.on('connection', function(socket){
+    console.log('a user connected',socket.client.id);
+  });
+  io.on('disconnect', function(socket){
+    console.log('a user disconnected');
+  });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -46,19 +65,32 @@ app.use(session({
 app.use(function(req,res,next){
   req.db = db;
   req.output = settings;
-  req.output.user = req.session.user || {};
+
   if (typeof req.session.user === "undefined" && req.path != "/login")
   {
     req.output.login = 0;
     res.redirect("/login");
+    console.log({login:false});
     return;
   }
-  else
+
+  if (req.path == "/login")
   {
-    var tmp = controller.get(req.session);
-    for (var key in tmp) { req.output[key] = tmp[key]; }
     next();
+    return;
   }
+
+  console.log({login:true});
+  db.get("users").findOne({email: req.session.user.email},function(err,docs)
+  {
+    req.session.user = docs;
+    req.output.user = req.session.user || {};
+    controller.get(req.output,function(data){
+      req.output = data;
+      next();
+    });
+  });
+
 });
 
 app.use('/', routes);
@@ -66,6 +98,7 @@ app.use('/api', api);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/users', users);
+app.use('/gateways', gateways);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -81,7 +114,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    var output = global.settings;
+    var output = settings;
     output.message = err.message;
     output.error = err;
     res.render('error', output);
@@ -92,7 +125,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  var output = global.settings;
+  var output = settings;
   output.message = err.message;
   output.error = {};
   res.render('error', output);
@@ -100,3 +133,56 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

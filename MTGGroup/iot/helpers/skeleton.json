@@ -1,0 +1,324 @@
+{
+  "user" :
+          {
+            "name" : "",
+            "surname" : "",
+            "email" : "jaco@peoplesoft.co.za",
+            "photo" : "/assets/img/me.jpg",
+            "gateways" : [],
+            "password" : "",
+            "status" : {
+                    "value" : "OK",
+                    "class" : "All is good..."
+            },
+            "stats" : {
+                    "api" : {
+                            "jan" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "feb" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "mar" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "apr" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "may" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "jun" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "jul" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "aug" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "sep" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "oct" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "nov" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "dec" : {
+                                    "count" : 0,
+                                    "percent" : 0
+                            },
+                            "total" : 0
+                    },
+                    "nodes" : {
+                            "count" : 0
+                    },
+                    "modules" : {
+                            "count" : 0
+                    }
+            }
+        },
+    "gateways":
+    {
+      "serial" : "gateway_asdf",
+      "status" : {"value":"OK","class":"error"},
+      "nodes" : [
+          {
+              "serial" : "node_asdf",
+              "desc" : "testNodestest",
+              "type" : "XBEE",
+              "location" : {
+                  "lat" : "24.543298",
+                  "lon" : "-26.212345"
+              },
+              "url" : "/gateways/:gateway_asdf/:node_asdf",
+              "status" : {
+                  "class" : "label-danger",
+                  "value" : "ERROR"
+              },
+              "modules" : [
+                  {
+                      "serial" : "BAT001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "Battery Monitor",
+                      "url" : "/gateways/:gateway_asdf/:node_asdf/:BAT001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "bat",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 80
+                              }
+                          ]
+                      ]
+                  },
+                  {
+                      "serial" : "THM001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-danger",
+                          "value" : "Error"
+                      },
+                      "desc" : "DHT11 Temp and Humidity",
+                      "url" : "/gateways/:gateway_asdf/:node_asdf/:THM001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "temp",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 25
+                              },
+                              {
+                                  "device" : "humidity",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 40
+                              }
+                          ]
+                      ]
+                  }
+              ]
+          },
+          {
+              "serial" : "node_qwer",
+              "desc" : "testNode2",
+              "type" : "NRF24L01",
+              "location" : {
+                  "lat" : "24.53424",
+                  "lon" : "-26.41123"
+              },
+              "url" : "/gateways/:gateway_asdf/:node_qwer",
+              "status" : {
+                  "class" : "label-success",
+                  "value" : "OK"
+              },
+              "modules" : [
+                  {
+                      "serial" : "BAT001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "Battery Monitor",
+                      "url" : "/gateways/:gateway_asdf/:node_qwer/:BAT001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "bat",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 74
+                              }
+                          ]
+                      ]
+                  },
+                  {
+                      "serial" : "THM001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "DHT11 Temp and Humidity",
+                      "url" : "/gateways/:gateway_asdf/:node_qwer/:THM001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "temp",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 21
+                              },
+                              {
+                                  "device" : "humidity",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 33
+                              }
+                          ]
+                      ]
+                  }
+              ]
+          }
+      ]
+    },
+    "gateways2":
+    {
+      "serial" : "gateway_qwer",
+      "nodes" : [
+          {
+              "serial" : "node_1234",
+              "desc" : "testNodestest",
+              "type" : "XBEE",
+              "location" : {
+                  "lat" : "24.543298",
+                  "lon" : "-26.212345"
+              },
+              "url" : "/gateways/:gateway_asdf/:node_asdf",
+              "status" : {
+                  "class" : "label-danger",
+                  "value" : "ERROR"
+              },
+              "modules" : [
+                  {
+                      "serial" : "BAT001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "Battery Monitor",
+                      "url" : "/gateways/:gateway_asdf/:node_asdf/:BAT001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "bat",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 80
+                              }
+                          ]
+                      ]
+                  },
+                  {
+                      "serial" : "THM001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-danger",
+                          "value" : "Error"
+                      },
+                      "desc" : "DHT11 Temp and Humidity",
+                      "url" : "/gateways/:gateway_asdf/:node_asdf/:THM001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "temp",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 25
+                              },
+                              {
+                                  "device" : "humidity",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 40
+                              }
+                          ]
+                      ]
+                  }
+              ]
+          },
+          {
+              "serial" : "node_qwer",
+              "desc" : "testNode2",
+              "type" : "NRF24L01",
+              "location" : {
+                  "lat" : "24.53424",
+                  "lon" : "-26.41123"
+              },
+              "url" : "/gateways/:gateway_asdf/:node_qwer",
+              "status" : {
+                  "class" : "label-success",
+                  "value" : "OK"
+              },
+              "modules" : [
+                  {
+                      "serial" : "BAT001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "Battery Monitor",
+                      "url" : "/gateways/:gateway_asdf/:node_qwer/:BAT001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "bat",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 74
+                              }
+                          ]
+                      ]
+                  },
+                  {
+                      "serial" : "THM001",
+                      "timestamp" : "Sun Apr 26 2015 21:50:38 GMT+0200 (South Africa Standard Time",
+                      "status" : {
+                          "class" : "label-success",
+                          "value" : "OK"
+                      },
+                      "desc" : "DHT11 Temp and Humidity",
+                      "url" : "/gateways/:gateway_asdf/:node_qwer/:THM001",
+                      "data" : [
+                          [
+                              {
+                                  "device" : "temp",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 21
+                              },
+                              {
+                                  "device" : "humidity",
+                                  "timestamp" : "Sun Apr 26 2015 21:42:38 GMT+0200 (South Africa Standard Time)",
+                                  "value" : 33
+                              }
+                          ]
+                      ]
+                  }
+              ]
+          }
+      ]
+    }
+
+}

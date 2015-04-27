@@ -2,37 +2,37 @@
                   		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   			<div class="box1">
 					  			<span class="li_heart"></span>
-					  			<h3>{{gateways.length}}</h3>
+					  			<h3>{{user.gateways.length}}</h3>
                   			</div>
-					  			<p>You currently own {{gateways.length}} gateway(s). Whoohoo!</p>
+					  			<p>You currently own {{user.gateways.length}} gateway(s). Whoohoo!</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_cloud"></span>
-					  			<h3>{{nodes.length}}</h3>
+					  			<h3>{{user.stats.nodes.count}}</h3>
                   			</div>
-					  			<p>You currently own {{nodes.length}} nodes actively sending data.</p>
+					  			<p>You currently own {{user.stats.nodes.count}} nodes actively sending data.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_stack"></span>
-					  			<h3>{{modules.length}}</h3>
+					  			<h3>{{user.stats.modules.count}}</h3>
                   			</div>
-					  			<p>You have {{modules.length}} modules in the field.</p>
+					  			<p>You have {{user.stats.modules.count}} modules in the field.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_news"></span>
-					  			<h3>+{{stats.api.total}}</h3>
+					  			<h3>+{{user.stats.api.total}}</h3>
                   			</div>
-					  			<p>You have made {{stats.api.total}} API calls this year.</p>
+					  			<p>You have made {{user.stats.api.total}} API calls this year.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
-					  			<h3>{{status.value}}</h3>
+					  			<h3>{{user.status.value}}</h3>
                   			</div>
-					  			<p>{{status.message}}</p>
+					  			<p>{{user.status.message}}</p>
                   		</div>
 
                   	</div><!-- /row mt -->
@@ -53,51 +53,51 @@
                           </ul>
                           <div class="bar">
                               <div class="title">JAN</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.jan.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jan.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.jan.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.jan.percent}}%</div>
                           </div>
                           <div class="bar ">
                               <div class="title">FEB</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.feb.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.feb.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.feb.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.feb.percent}}%</div>
                           </div>
                           <div class="bar ">
                               <div class="title">MAR</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.mar.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.mar.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.mar.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.mar.percent}}%</div>
                           </div>
                           <div class="bar ">
                               <div class="title">APR</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.apr.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.apr.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.apr.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.apr.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">MAY</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.may.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.may.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.may.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.may.percent}}%</div>
                           </div>
                           <div class="bar ">
                               <div class="title">JUN</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.jun.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jun.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.jun.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.jun.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">JUL</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.jul.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.jul.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.jul.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.jul.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">AUG</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.aug.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.aug.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.aug.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.aug.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">SEP</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.sep.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.sep.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.sep.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.sep.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">OCT</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.oct.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.oct.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.oct.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.oct.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">NOV</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.nov.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.nov.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.nov.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.nov.percent}}%</div>
                           </div>
                           <div class="bar">
                               <div class="title">DEC</div>
-                              <div class="value tooltips" data-original-title="{{stats.api.dec.count}}" data-toggle="tooltip" data-placement="top">{{stats.api.dec.percent}}%</div>
+                              <div class="value tooltips" data-original-title="{{user.stats.api.dec.count}}" data-toggle="tooltip" data-placement="top">{{user.stats.api.dec.percent}}%</div>
                           </div>
                       </div>
                       <!--custom chart end-->

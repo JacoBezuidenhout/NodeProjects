@@ -1,34 +1,47 @@
-var ALERTS = require("./helpers/alerts");
-var STATS = require("./helpers/stats");
-var STATUS = require("./helpers/status");
+var db;
+var Validator = require('jsonschema').Validator;
+var v = new Validator();
+var schema = require("./helpers/schema.json");
+var skel = require("./helpers/skeleton.json");
 
-var GATEWAYS = require("./helpers/gateways");
-var NODES = require("./helpers/nodes");
-var MODULES = require("./helpers/modules");
-
-
-function CONTROLLER(db)
+function CONTROLLER(database)
 {
-  this.db = db;
-  this.alerts = new ALERTS(db.get("alerts"));
-  this.stats = new STATS(db.get("stats"));
-  this.status = new STATUS(db.get("status"));
-  this.gateways = new GATEWAYS(db.get("gateways"));
-  this.nodes = new NODES(db.get("gateways"));
-  this.modules = new MODULES(db.get("gateways"));
+  db = database;
+  v.addSchema(schema.status);
+  v.addSchema(schema.location);
+  v.addSchema(schema.data);
+  v.addSchema(schema.module);
+  v.addSchema(schema.node);
+  v.addSchema(schema.bigdata);
+  v.addSchema(schema.user);
+  console.log(v.validate(skel.user, schema.user));
+  console.log(v.validate(skel.gateways, schema.bigdata));
+  console.log("Controller Started");
 }
 
-CONTROLLER.prototype.get = function(db,session)
+CONTROLLER.prototype.get = function(output,callback)
 {
-  var output = {};
-  output.alerts = this.alerts.get(session);
-  output.stats = this.stats.get(session);
-  output.status = this.status.get(session);
-  output.gateways = this.gateways.get(session);
-  output.nodes = this.nodes.get(session);
-  output.modules = this.modules.get(session);
+  var gateways = output.user.gateways;
+  // console.log(gateways);
+  gateways.forEach(function(gateway)
+  {
+    var bigdata = db.get("bigdata");
+    bigdata.findOne({serial: gateway.serial},function(err,docs)
+    {
+      if (typeof docs !== "undefined")
+      // docs.nodes.forEach(function(node){
+      //   // console.log(node);
+      // });
+      gateway.bigdata = docs;
+      // console.log(gateway);
+    });
+  });
+  callback(output);
+}
 
-  return output;
+CONTROLLER.prototype.val = function(instance,callback)
+{
+  console.log(v.validate(instance, schema));
 }
 
 module.exports = CONTROLLER;
