@@ -41,7 +41,7 @@ var io = require('socket.io')(server);
     console.log('a user connected',socket.client.id);
   });
   io.on('disconnect', function(socket){
-    console.log('a user disconnected');
+    console.log('a user disconnected',socket.client.id);
   });
 
 // view engine setup
