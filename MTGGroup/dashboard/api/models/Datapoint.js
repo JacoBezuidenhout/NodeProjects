@@ -10,17 +10,12 @@ module.exports = {
   attributes: {
 
     id: {
-      type: "string",
+      type: "number",
       primaryKey: true,
       unique: true,
       autoIncrement: true
     },
     
-    device: {
-      type: 'string',
-      required: true
-    },
-
     value: {
       type: 'string',
       required: true

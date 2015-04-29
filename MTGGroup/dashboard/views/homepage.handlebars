@@ -19,7 +19,7 @@
           <h4 class="modal-title">Add Gateway</h4>
         </div>
         <div class="modal-body">
-          <p ng-show="message" class="{/message.class//">{/message.text//</p>
+          <p ng-show="message" class="{/message.class/}">{/message.text/}</p>
           <form novalidate class="form">
             Serial#:
             <input type="text" ng-model="gw.serial" />
@@ -27,8 +27,8 @@
             <input type="text" ng-model="gw.type" />
             <br/> Description:
             <input type="text" ng-model="gw.description" />
-            <!-- <pre>form = //gw | json//</pre>
-            <pre>master = //master | json//</pre> -->
+            <!-- <pre>form = /}gw | json/}</pre>
+            <pre>master = /}master | json/}</pre> -->
         </div>
         <div class="modal-footer">
 
@@ -54,7 +54,7 @@
           <h4 class="modal-title">Edit Gateway</h4>
         </div>
         <div class="modal-body">
-          <p ng-show="message" class="{/message.class//">{/message.text//</p>
+          <p ng-show="message" class="{/message.class/}">{/message.text/}</p>
           <form novalidate class="form">
             Serial#:
             <input type="text" class="form-control" disabled ng-model="gw.s" />
@@ -66,8 +66,8 @@
             <input type="text" class="form-control" ng-model="gw.lat" />
             <br/> Lon:
             <input type="text" class="form-control" ng-model="gw.lon" />
-            <!-- <pre>form = //gw | json//</pre>
-            <pre>master = //master | json//</pre> -->
+            <!-- <pre>form = /}gw | json/}</pre>
+            <pre>master = /}master | json/}</pre> -->
         </div>
         <div class="modal-footer">
 
@@ -115,14 +115,14 @@
   <div class="row">
 
     <div class="panel-group col-md-10 col-md-offset-1" id="acc_gateways" role="tablist" aria-multiselectable="true" ng-repeat="gateway in gateways | filter:query | orderBy:orderProp">
-      <div class="panel panel-default">
+      <div class="panel panel-{/gateway.status || 'default'/}">
         <div class="panel-heading" role="tab" id="headingOne">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#acc_gateways" href="#gateway{/gateway.serial//" aria-expanded="false" aria-controls="gateway{/gateway.serial//">
+            <a data-toggle="collapse" data-parent="#acc_gateways" href="#gateway{/gateway.serial/}" aria-expanded="false" aria-controls="gateway{/gateway.serial/}">
               <div class="row">
-                <div class="col-md-4">Gateway | {/gateway.serial// </div>
-                <div class="col-md-2"> {/gateway.type// </div>
-                <div class="col-md-4"> {/gateway.createdAt// </div>
+                <div class="col-md-4"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Gateway | {/gateway.serial/} </div>
+                <div class="col-md-2"> {/gateway.type/} </div>
+                <div class="col-md-4"> {/gateway.createdAt/} </div>
                 <div class="col-md-2">
                   <button type="button" ng-click="load(gateway.serial)" class="btn btn-md btn-default" data-toggle="modal" data-target="#editGateway">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button>
@@ -131,21 +131,35 @@
             </a>
           </h4>
         </div>
-        <div id="gateway{/gateway.serial//" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+        <div id="gateway{/gateway.serial/}" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
           <div class="panel-body">
+          <p ng-hide="gateway.nodes.length" class="alert-info">No nodes connected to gateway</p>
 
             <div class="panel-group" id="acc_nodes" role="tablist" aria-multiselectable="true" ng-repeat="node in gateway.nodes">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+              <div class="panel panel-{/node.status || 'primary'/}">
+                <div class="panel-heading " role="tab" id="headingOne">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#acc_nodes" href="#node{/node.serial//" aria-expanded="false" aria-controls="node{/node.serial//">
-                        Node | {/node.serial// {/node.type// {/node.createdAt//
+                    <a data-toggle="collapse" data-parent="#acc_nodes" href="#node{/node.serial/}" aria-expanded="false" aria-controls="node{/node.serial/}">
+                        Node | {/node.serial/} {/node.type/} {/node.createdAt/}
                       </a>
                   </h4>
                 </div>
-                <div id="node{/node.serial//" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                <div id="node{/node.serial/}" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
-
+                    <p ng-hide="node.modules.length" class="alert-info">No modules connected to node</p>
+                    <div class="row" >
+                      <div class="col-sm-3 col-md-2"  ng-repeat="module in node.modules">
+                        <div class="thumbnail">
+                          <img src="..." alt="...">
+                          <div class="caption">
+                            <h3>{/module.serial/}</h3>
+                            <p>{/module.serial/}</p> 
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+<!-- 
                     <div class="panel-group" id="acc_modules" role="tablist" aria-multiselectable="true" ng-repeat="module in node.modules">
                       <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
@@ -190,8 +204,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
+                    </div> -->
                   </div>
                 </div>
               </div>

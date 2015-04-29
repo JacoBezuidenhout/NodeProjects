@@ -25,6 +25,11 @@ module.exports = {
       required: true
     },
 
+    status: {
+      type: 'string',
+      required: true
+    },
+
     lat: {
       type: 'string',
       defaultsTo: 0

@@ -2,7 +2,7 @@ var app = angular.module('Dashboard', []);
 
 app.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{/');
-  $interpolateProvider.endSymbol('//');
+  $interpolateProvider.endSymbol('/}');
 });
 
 app.factory('socket', function($rootScope) {
