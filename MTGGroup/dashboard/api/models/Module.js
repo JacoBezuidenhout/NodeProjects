@@ -8,6 +8,14 @@
 module.exports = {
 
   attributes: {
+
+    id: {
+      type: "string",
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
+    },
+
     serial: {
       type: 'string',
       required: true
