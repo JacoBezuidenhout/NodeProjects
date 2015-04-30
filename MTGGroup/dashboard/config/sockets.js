@@ -106,76 +106,76 @@ module.exports.sockets = {
   * app's security.                                                          *
   *                                                                          *
   ***************************************************************************/
-  onConnect: function(session, socket) {
-    // `true` allows the connection
-    console.log(session);
-    socket.on("login",function(data){
-      console.log("Login Attempt");
-      Gateway.findOne({serial:data.serial},function(err,gateway){
-        if (typeof gateway !== 'undefined')
-        {
-          socket.gateway = gateway;
-          console.log(gateway);
-          socket.emit('login',{"login":true});
-          socket.on("datapoint",function(datapoint){
-              console.log(datapoint);
-          });
-        }
-        else
-          {
-            if (typeof data.serial !== 'undefined' && typeof data.type !== 'undefined')
-              Gateway.create(data,function(err,gw){
-                console.log("Created",gw);
-                socket.gateway = gw;
-                socket.emit('login',{"login":true});
-                socket.on("datapoint",function(datapoint){
-                    console.log(datapoint);
-
-                    Node.findOne({serial:datapoint.node.serial},function(err,node){
-                        if (typeof node !== 'undefined')
-                        {
-                            var modules = node.modules;
-                            var flag = false;
-                            modules.forEach(function(module){
-                                if (datapoint.module.serial == module.serial)
-                                {
-                                  Module.findOne({id:module.id},function(err,m){
-                                    Datapoint.create(datapoint.datapoint,function(err,dp){
-                                      m.datapoints.push(dp);
-                                    });
-                                  });
-                                  falg = true;
-                                  return;
-                                }
-                            });          
-
-                        }
-                        else
-                        {
-                            Node.create(datapoint.module,function(err,node){
-                              
-                              Module.create(datapoint.module,function(err,module){
-                                Datapoint.create(datapoint.datapoint,function(err,dp){
-                                  module.datapoints.push(dp);
-                                });
-                                node.modules.push(module);
-                              });
-                            
-                            });
-                        }
-                    });
-
-
-                });
-              });
-            else
-              socket.emit('login',{"login":false});
-          }  
-      });
-    });
-  
-    // (`false` would reject the connection)
-  },
+  // onConnect: function(session, socket) {
+  //   // `true` allows the connection
+  //   console.log(session);
+  //   socket.on("login",function(data){
+  //     console.log("Login Attempt");
+  //     Gateway.findOne({serial:data.serial},function(err,gateway){
+  //       if (typeof gateway !== 'undefined')
+  //       {
+  //         socket.gateway = gateway;
+  //         console.log(gateway);
+  //         socket.emit('login',{"login":true});
+  //         socket.on("datapoint",function(datapoint){
+  //             console.log(datapoint);
+  //         });
+  //       }
+  //       else
+  //         {
+  //           if (typeof data.serial !== 'undefined' && typeof data.type !== 'undefined')
+  //             Gateway.create(data,function(err,gw){
+  //               console.log("Created",gw);
+  //               socket.gateway = gw;
+  //               socket.emit('login',{"login":true});
+  //               socket.on("datapoint",function(datapoint){
+  //                   console.log(datapoint);
+  //
+  //                   Node.findOne({serial:datapoint.node.serial},function(err,node){
+  //                       if (typeof node !== 'undefined')
+  //                       {
+  //                           var modules = node.modules;
+  //                           var flag = false;
+  //                           modules.forEach(function(module){
+  //                               if (datapoint.module.serial == module.serial)
+  //                               {
+  //                                 Module.findOne({id:module.id},function(err,m){
+  //                                   Datapoint.create(datapoint.datapoint,function(err,dp){
+  //                                     m.datapoints.push(dp);
+  //                                   });
+  //                                 });
+  //                                 falg = true;
+  //                                 return;
+  //                               }
+  //                           });
+  //
+  //                       }
+  //                       else
+  //                       {
+  //                           Node.create(datapoint.module,function(err,node){
+  //
+  //                             Module.create(datapoint.module,function(err,module){
+  //                               Datapoint.create(datapoint.datapoint,function(err,dp){
+  //                                 module.datapoints.push(dp);
+  //                               });
+  //                               node.modules.push(module);
+  //                             });
+  //
+  //                           });
+  //                       }
+  //                   });
+  //
+  //
+  //               });
+  //             });
+  //           else
+  //             socket.emit('login',{"login":false});
+  //         }
+  //     });
+  //   });
+  //
+  //   // (`false` would reject the connection)
+  // },
 
 
   /***************************************************************************

@@ -10,13 +10,18 @@ module.exports = {
   attributes: {
 
     id: {
-      type: "number",
+      type: "string",
       primaryKey: true,
       unique: true,
       autoIncrement: true
     },
-    
+
     value: {
+      type: 'string',
+      required: true
+    },
+
+    verb: {
       type: 'string',
       required: true
     }
