@@ -29,7 +29,7 @@ module.exports.models = {
   ***************************************************************************/
   // migrate: 'alter'
 
-  schema: true,
+  schema: true
 
-  autoPK: false
+  // autoPK: false
 };

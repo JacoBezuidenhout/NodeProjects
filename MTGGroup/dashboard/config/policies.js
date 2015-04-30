@@ -26,7 +26,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-   '*': true,
+   '*': [ 'passport' ]
 
   /***************************************************************************
   *                                                                          *
@@ -34,12 +34,6 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
-	SayController : {
-    '*' : false,
-    hi : true
-
-  }
-
   // RabbitController: {
 
 		// Apply the `false` policy as the default for all of RabbitController's actions
