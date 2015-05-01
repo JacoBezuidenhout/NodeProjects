@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="microblogApp">
+<head>
+  <title>IOT Dashboard</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    <ng-include src="'partials/header.html'"></ng-include>
+
+    <div class="feed" ng-controller="UserFeedCtrl">
+      <div class="span8">
+        <h2>@{{username}}'s gateways</h2>
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: feedName == 'gateways'}"><a href ng-click="switchFeeds('gateways')">Gateways</a></li>
+          <li ng-class="{active: feedName == 'nodes'}"><a href ng-click="switchFeeds('nodes')">Nodes</a></li>
+        </ul>
+        <ng-include src="'partials/feed.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/global.js"></script>
+  <script type="text/javascript" src="/js/user.js"></script>
+</body>
+</html>
