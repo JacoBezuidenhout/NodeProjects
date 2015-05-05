@@ -1,0 +1,102 @@
+{
+  "status":
+  {
+    "id": "/status",
+    "type": "object",
+    "properties": {
+        "value" :       {"type": "string"},
+        "class" :       {"type": "string"}
+    },
+    "required": ["value","class"]
+  },
+  "location":
+  {
+    "id": "/location",
+    "type": "object",
+    "properties": {
+        "lat" :         {"type": "string"},
+        "lon" :         {"type": "string"}
+    }
+  },
+  "data":
+  {
+    "id": "/data",
+    "type": "object",
+    "properties": {
+        "device" :      {"type": "string"},
+        "timestamp" :   {"type": "string"},
+        "value" :       {"type": "number"}
+    }
+  },
+  "module":
+  {
+    "id": "/module",
+    "type": "object",
+    "properties": {
+        "serial" :      {"type": "string"},
+        "timestamp" :   {"type": "string"},
+        "status" :      {"$ref": "/status"},
+        "desc" :        {"type": "string"},
+        "url" :         {"type": "string"},
+        "data" :        {
+                          "type": "array",
+                          "items": {
+                                    "type": "array",
+                                    "items":{"$ref":"/data"}
+                                   }
+                        }
+    },
+    "required": ["serial"]
+  },
+  "node":
+  {
+    "id": "/node",
+    "type": "object",
+    "properties": {
+        "serial" :      {"type": "string"},
+        "desc" :        {"type": "string"},
+        "type" :        {"type": "string"},
+        "location" :    {"$ref": "/location"},
+        "status" :      {"$ref": "/status"},
+        "modules" :     {
+                          "type":"array",
+                          "items":{"$ref": "/module"}
+                        },
+        "url" :          {"type": "string"}
+    },
+    "required": ["serial"]
+  },
+  "user":
+  {
+    "id": "/user",
+    "type": "object",
+    "properties": {
+      "name" :          {"type": "string"},
+      "surname" :       {"type": "string"},
+      "email" :         {"type": "string"},
+      "photo" :         {"type": "string"},
+      "gateways" :      {
+                          "type": "array",
+                          "items": {"type": "object"}
+                        },
+      "password" :      {"type": "string"},
+      "status" :        {"$ref": "/status"}
+    },
+    "required": ["email","password"]
+  },
+  "bigdata":
+  {
+    "id": "/bigdata",
+    "type": "object",
+    "properties": {
+      "serial" :        {"type": "string"},
+      "status" :        {"$ref": "/status"},
+      "nodes" :         {
+                          "type":"array",
+                          "items":{"$ref": "/node"}
+                        }
+    }
+  }
+
+
+}

@@ -1,0 +1,45 @@
+{
+	"type": "Collection",
+	"properties": {
+		"serial": {
+			"name": "serial",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "serial",
+			"order": 0
+		},
+		"type": {
+			"name": "type",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "type",
+			"order": 1
+		},
+		"modules": {
+			"name": "modules",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "modules",
+			"order": 2
+		},
+		"lat": {
+			"name": "lat",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lat",
+			"order": 3
+		},
+		"lon": {
+			"name": "lon",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lon",
+			"order": 4
+		}
+	}
+}

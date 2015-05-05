@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="microblogApp">
+<head>
+  <title>IOT Dashboard</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Angular does some things with CSS so it's good to load this in the head -->
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">IOT Dashboard</h1>
+    <div class="col-md-4 col-md-offset-4 well">
+      <h2 class="text-center">Register</h2>
+      <form ng-controller="RegisterCtrl">
+        <label>Username</label>
+        <input type="text" class="form-control" ng-model="username" placeholder="Username" />
+        <br>
+        <label>Password</label>
+        <input type="password" class="form-control" ng-model="password" placeholder="Password" />
+        <br>
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" ng-model="confirmPassword" placeholder="Retype Password" />
+        <br>
+        <div class="text-center">
+          <button class="btn btn-primary" ng-click="register()">Register</button>
+          <a class="btn btn-danger" href="/" ng-href="{{referrer}}" class="btn btn-link">Cancel</a>
+        </div>
+      </form>    
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/global.js"></script>
+  <script type="text/javascript" src="/js/register.js"></script>
+</body>
+</html>

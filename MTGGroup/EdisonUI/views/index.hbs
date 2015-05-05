@@ -1,0 +1,165 @@
+<script src="./javascripts/gauge.min.js"></script>
+<script src="/javascripts/socket.io.js"></script>
+
+<div style="text-align:center;">
+  <h1>{{title}}</h1>
+  <p>Welcome to {{title}}</p>
+</div>
+
+<div style="text-align:center;">
+  <canvas id="light"></canvas>
+  <canvas id="humid"></canvas>
+  <canvas id="temp"></canvas>
+</div>
+<br/>
+<br/>
+<div style="text-align:center;">
+  <h2 style="width:30%">Red</h2>
+  <h2 style="width:30%">Green</h2>
+  <h2 style="width:30%">Blue</h2>
+</div>
+<div style="text-align:center;">
+  <input style="width:30%" onchange="updateR(this.value)" id="R" min="0" max="255" type="range"/>
+  <input style="width:30%" onchange="updateG(this.value)" id="G" min="0" max="255" type="range"/>
+  <input style="width:30%" onchange="updateB(this.value)" id="B" min="0" max="255" type="range"/>
+</div>
+
+<script>
+var w = window.innerWidth;
+var h = window.innerHeight;
+var socket = io('http://192.168.42.1:8080');
+
+var temp = new Gauge({
+  renderTo    : 'temp',
+  width       : w/4,
+  height      : w/4,
+  glow        : true,
+  units       : 'V',
+  title       : false,
+  minValue    : 0,
+  maxValue    : 1024,
+  majorTicks  : ['0','20','40','60','80','100','120','125','128','256','512','1024'],
+  minorTicks  : 2,
+  strokeTicks : false,
+  highlights  : [
+    { from : 0,   to : 50, color : 'rgba(0,   255, 0, .8)' },
+    { from : 50, to : 100, color : 'rgba(255, 255, 0, .8)' },
+    { from : 100, to : 150, color : 'rgba(255, 30,  0, .8)' },
+    { from : 150, to : 200, color : 'rgba(255, 0,  225, .8)' },
+    { from : 200, to : 220, color : 'rgba(0, 0,  255, .8)' }
+  ],
+  colors      : {
+    plate      : '#222',
+    majorTicks : '#f5f5f5',
+    minorTicks : '#ddd',
+    title      : '#fff',
+    units      : '#ccc',
+    numbers    : '#eee',
+    needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+  }
+});
+var humid = new Gauge({
+  renderTo    : 'humid',
+  width       : w/4,
+  height      : w/4,
+  glow        : true,
+  units       : 'Gas',
+  title       : false,
+  minValue    : 0,
+  maxValue    : 220,
+  majorTicks  : ['0','20','40','60','80','100','120','140','160','180','200','220'],
+  minorTicks  : 2,
+  strokeTicks : false,
+  highlights  : [
+    { from : 0,   to : 50, color : 'rgba(0,   255, 0, .8)' },
+    { from : 50, to : 100, color : 'rgba(255, 255, 0, .8)' },
+    { from : 100, to : 150, color : 'rgba(255, 30,  0, .8)' },
+    { from : 150, to : 200, color : 'rgba(255, 0,  225, .8)' },
+    { from : 200, to : 220, color : 'rgba(0, 0,  255, .8)' }
+  ],
+  colors      : {
+    plate      : '#222',
+    majorTicks : '#f5f5f5',
+    minorTicks : '#ddd',
+    title      : '#fff',
+    units      : '#ccc',
+    numbers    : '#eee',
+    needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+  }
+});
+var light = new Gauge({
+  renderTo    : 'light',
+  width       : w/4,
+  height      : w/4,
+  glow        : true,
+  units       : 'Light',
+  title       : false,
+  minValue    : 0,
+  maxValue    : 600,
+  majorTicks  : ['0','20','40','60','80','100','120','140','160','180','200','600'],
+  minorTicks  : 2,
+  strokeTicks : false,
+  highlights  : [
+    { from : 0,   to : 50, color : 'rgba(0,   255, 0, .8)' },
+    { from : 50, to : 100, color : 'rgba(255, 255, 0, .8)' },
+    { from : 100, to : 150, color : 'rgba(255, 30,  0, .8)' },
+    { from : 150, to : 200, color : 'rgba(255, 0,  225, .8)' },
+    { from : 200, to : 220, color : 'rgba(0, 0,  255, .8)' }
+  ],
+  colors      : {
+    plate      : '#222',
+    majorTicks : '#f5f5f5',
+    minorTicks : '#ddd',
+    title      : '#fff',
+    units      : '#ccc',
+    numbers    : '#eee',
+    needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+  }
+});
+
+temp.onready = function() {
+  socket.on('pot', function(msg){
+    console.log('message: ' + msg);
+    temp.setValue(msg);
+  });
+};
+
+light.onready = function() {
+  light.setValue( Math.random() * 220);
+  socket.on('light', function(msg){
+    console.log('message: ' + msg);
+    light.setValue(msg);
+  });
+};
+
+humid.onready = function() {
+  humid.setValue( Math.random() * 220);
+  socket.on('smoke', function(msg){
+    console.log('message: ' + msg);
+    humid.setValue(msg);
+  });
+};
+
+temp.draw();
+light.draw();
+humid.draw();
+
+function updateR(value)
+{
+  console.log(value);
+  socket.emit('R', value);
+}
+
+function updateG(value)
+{
+  console.log(value);
+  socket.emit('G', value);
+}
+
+function updateB(value)
+{
+  console.log(value);
+  socket.emit('B', value);
+}
+
+</script>

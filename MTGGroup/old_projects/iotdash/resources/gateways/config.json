@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"serial": {
+			"name": "serial",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "serial",
+			"order": 0
+		},
+		"type": {
+			"name": "type",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "type",
+			"order": 1
+		},
+		"nodes": {
+			"name": "nodes",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "nodes",
+			"order": 2
+		},
+		"owned": {
+			"name": "owned",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "owned",
+			"order": 3
+		}
+	}
+}
